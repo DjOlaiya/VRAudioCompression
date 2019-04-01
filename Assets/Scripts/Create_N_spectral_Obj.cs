@@ -6,11 +6,16 @@ public class Create_N_spectral_Obj : MonoBehaviour
 {
     public GameObject _SpectralObjects;
     public float _ScalarMult;
-
-    public static int n =InitAudio._arrsize;
+    public static int n =InitAudio.numSamples;
     GameObject[] _sampleobj = new GameObject[n];
 
     void Start()
+    {
+        CreateSampleShapes();
+    }
+    
+    //init all 1024  shapes.
+    void CreateSampleShapes()
     {
         for(int i=0; i<n; i++)
         {
@@ -21,17 +26,13 @@ public class Create_N_spectral_Obj : MonoBehaviour
             _spectralobjInstance.transform.position=new Vector3(i,i,0);
             _sampleobj[i] = _spectralobjInstance;
         }
-         Renderer rend = gameObject.GetComponent<Renderer>();
-        rend.material.shader = Shader.Find("_Color");
-        rend.material.SetColor("_Color", Color.green);
     }
-
-    // Update is called once per frame
     void Update()
     {
         amplitudeFn();
     }
 
+//change in y axis of shapes
     void amplitudeFn()
     {
         for(int i=0;i<n;i++)

@@ -5,14 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class InitAudio : MonoBehaviour
 {
+    //all my declarations
+     public const int numBands=512;
+     public const int numSamples=1024;
     AudioSource  _audio;
-   //if i don't make it static I cant access it properly from other scripts? why public should be enough?
-
-
-    public static float[] _sample = new float[1024]; //once i make it static it wont show up in unity cos it cant be changed
-  
-    public static int _arrsize= _sample.Length;
-    public float[] spectrum = new float[64];
+    public static float[] _sample = new float[numSamples]; //once i make it static it wont show up in unity cos it cant be changed
+    public static float[] _freqGroupd=new float[numBands];
+    public static float[] _buffer = new float[numBands];
   
     void Start()
     {
@@ -23,35 +22,40 @@ public class InitAudio : MonoBehaviour
     void Update()
     {
         GetAudioSpectrum();   
-       // GetAudioSpectrum_tutorial(); 
+        GroupFreq();
     }
 
+//get audio and perform FFT
     void GetAudioSpectrum()
     {
         _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);
+        
     }
 
-
-
- //function to get audio using docs. figure out what it does later.
-    void GetAudioSpectrum_tutorial()
-    {
-//sample from unity documentation
-        AudioListener.GetSpectrumData(spectrum, 0, FFTWindow.Rectangular);
-
-        for (int i = 1; i < spectrum.Length - 1; i++)
-        {
-            Debug.DrawLine(new Vector3(i - 1, spectrum[i] + 10, 0), new Vector3(i, spectrum[i + 1] + 10, 0), Color.red);
-            Debug.DrawLine(new Vector3(i - 1, Mathf.Log(spectrum[i - 1]) + 10, 2), new Vector3(i, Mathf.Log(spectrum[i]) + 10, 2), Color.cyan);
-            Debug.DrawLine(new Vector3(Mathf.Log(i - 1), spectrum[i - 1] - 10, 1), new Vector3(Mathf.Log(i), spectrum[i] - 10, 1), Color.green);
-            Debug.DrawLine(new Vector3(Mathf.Log(i - 1), Mathf.Log(spectrum[i - 1]), 3), new Vector3(Mathf.Log(i), Mathf.Log(spectrum[i]), 3), Color.blue);
-        }
-    }
-
-    void GroupFreq()
+//take freq samples and group into bands for more spectral range
+ void GroupFreq()
     {
         /*
-        220050/1024= */
+        220050/1024= 5.38hz/sample
+        split this into 1024 bands. If I do it evenly then 21.53hz/band. 
+        If I try to do it using powers of 2 like he did, I end up with
+        really small values in the range 0-1 for the first few values.
+
+         */
+        int sampleID =0;
+        for(int i=0;i<numBands;i++)
+        {
+            int samplePerBand= 8;
+            float avg=0;
+            for(int j=0;j<samplePerBand;j++)
+            {
+                avg+= _sample[sampleID]*(sampleID+1);
+                sampleID++;
+            }
+            avg/=samplePerBand;
+            _freqGroupd[i]=avg*10;
+    }
+
     }
 
 
