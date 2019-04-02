@@ -6,7 +6,7 @@ using UnityEngine;
 public class InitAudio : MonoBehaviour
 {
     //all my declarations
-     public const int numBands=512;
+     public const int numBands=32;
      public const int numSamples=1024;
     AudioSource  _audio;
     public static float[] _sample = new float[numSamples]; //once i make it static it wont show up in unity cos it cant be changed
@@ -36,7 +36,7 @@ public class InitAudio : MonoBehaviour
  void GroupFreq()
     {
         /*
-        220050/1024= 5.38hz/sample
+        220050/1024= 5.38hz/sample_el
         split this into 1024 bands. If I do it evenly then 21.53hz/band. 
         If I try to do it using powers of 2 like he did, I end up with
         really small values in the range 0-1 for the first few values.
@@ -45,14 +45,15 @@ public class InitAudio : MonoBehaviour
         int sampleID =0;
         for(int i=0;i<numBands;i++)
         {
-            int samplePerBand= 8;
+            int samplePerBand= 32;
             float avg=0;
             for(int j=0;j<samplePerBand;j++)
             {
-                avg+= _sample[sampleID]*(sampleID+1);
+                avg+= _sample[sampleID]; //*(sampleID+1);
                 sampleID++;
             }
             avg/=samplePerBand;
+        //valuesin arr are small so mult by 10 to make
             _freqGroupd[i]=avg*10;
     }
 

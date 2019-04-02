@@ -126,4 +126,12 @@ public class InitAudio : MonoBehaviour
 }
 
 
-   
+      //  for(int i=0; i<N; i++)
+        // {
+        //     GameObject _SpectralBand1024 = (GameObject)Instantiate(_SpectralBands);
+        //     _SpectralBand1024.transform.position = this.transform.position;
+        //     _SpectralBand1024.transform.parent=this.transform;
+        //     _SpectralBand1024.name="spectralBandwidth" + i;
+        //     _SpectralBand1024.transform.position=new Vector3(i,i,10);
+        //     _mybands[i] = _SpectralBand1024;
+        // }
