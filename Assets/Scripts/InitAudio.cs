@@ -7,29 +7,32 @@ public class InitAudio : MonoBehaviour
 {
     //all my declarations
      public const int numBands=32;
-     public const int numSamples=1024;
+     public const int numSamples=4096;
+     public AudioClip original;
+        public AudioClip compressed;
     AudioSource  _audio;
+    
     public static float[] _sample = new float[numSamples]; //once i make it static it wont show up in unity cos it cant be changed
     public static float[] _freqGroupd=new float[numBands];
     public static float[] _buffer = new float[numBands];
-  
     void Start()
     {
         _audio = GetComponent<AudioSource>();
+        _audio.PlayOneShot(original);
+        _audio.PlayOneShot(compressed);
     }
 
   
     void Update()
     {
         GetAudioSpectrum();   
-        GroupFreq();
+        GroupFreq();    
     }
 
 //get audio and perform FFT
     void GetAudioSpectrum()
     {
-        _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);
-        
+        _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);    
     }
 
 //take freq samples and group into bands for more spectral range
@@ -55,7 +58,12 @@ public class InitAudio : MonoBehaviour
             avg/=samplePerBand;
         //valuesin arr are small so mult by 10 to make
             _freqGroupd[i]=avg*10;
+        }
+
     }
+
+    void thirdOctaveBands()
+    {
 
     }
 

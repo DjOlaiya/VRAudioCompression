@@ -53,10 +53,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CompressedAudio.cs" />
      <Compile Include="Assets\Scripts\Create_N_spectral_Obj.cs" />
      <Compile Include="Assets\Scripts\FreqBand.cs" />
+     <Compile Include="Assets\Scripts\FreqCompress.cs" />
      <Compile Include="Assets\Scripts\InitAudio.cs" />
-     <None Include="Assets\Capsuleshader.shader" />
+     <None Include="Assets\material\Capsuleshader.shader" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>/Users/AyoDj/Desktop/VR/VRAudioCompression/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>

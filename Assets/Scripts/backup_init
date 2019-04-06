@@ -135,3 +135,73 @@ public class InitAudio : MonoBehaviour
         //     _SpectralBand1024.transform.position=new Vector3(i,i,10);
         //     _mybands[i] = _SpectralBand1024;
         // }
+
+
+        
+        // for(int i=0;i<N;i++)
+        //         {
+        //          Transform _spect=Instantiate(prefab);
+        //             position.x=i;
+        //             _spect.localPosition=position;
+        //             _spect.localScale=scale;
+        //             _spect.name="shape"+i;
+        //             _spect.SetParent(transform);
+        //             _bandarray[i]= _spect;
+        //         }    
+        //  for(int i =0,z=0;i<N;z++)
+        //     {
+        //         for(int x=0;x<N;x++,i++)
+        //         {
+        //          Transform _spect=Instantiate(prefab);
+        //             position.x=i;
+        //             _spect.localPosition=position;
+        //             _spect.localScale=scale;
+        //             _spect.name="shape"+i;
+        //             _spect.SetParent(transform);
+        //             _bandarray[i]= _spect;
+        //         }    
+        //     }
+
+
+          //_CurFreqBand.CopyTo(_prevfreqband,0);
+           // spectra.CopyTo(_CurFreqBand,0); 
+
+            // for(int i=0;i<N;i++)
+        // {
+        //         _bandarray[i].transform.localScale = new Vector3(transform.localScale.x,
+        //         (InitAudio._freqGroupd[i]*_Mult)+_startvalue,transform.localScale.z);
+        // }
+        
+        // for(int i=0;i<N;i++)
+        // {
+        //         _mybands[i].transform.localScale = new Vector3(transform.localScale.x,
+        //         (InitAudio._freqGroupd[i]*_Mult)+_startvalue,transform.localScale.z);
+        // }
+
+        // for(int i = 0; i<N;i++){
+        //     for(int j = 1; j<N; j++){
+        //         _ampArr2d[i,j] = _ampArr2d[i,j-1];
+        //     }
+        // }
+
+        // for(int x = 0; x<N; x++){
+        //     _ampArr2d[x, 0] = InitAudio._freqGroupd[x];
+        //     //time ++;
+        // }
+
+              // for(int i=0; i<N; i++){
+        //     for(int j=0; j<N; j++){
+        //         _bandarray2d[i,j].transform.localScale = new Vector3(transform.localScale.x,
+        //         (InitAudio._freqGroupd[j]*_Mult)+_startvalue,transform.localScale.z);
+        //     }
+        // }
+
+
+        //  public void arrinst()
+//     {
+//         for(int i=0 ;i<8 ;i++)
+//         {
+//             public  float[] _prevfreqband = new float[N]; 
+//             _prevfreqband.name="_prefreqband"+i;  
+//         }
+//     }
