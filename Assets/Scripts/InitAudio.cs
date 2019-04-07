@@ -7,7 +7,7 @@ public class InitAudio : MonoBehaviour
 {
     //all my declarations
      public const int numBands=32;
-     public const int numSamples=4096;
+     public const int numSamples=1024;
      public AudioClip original;
         public AudioClip compressed;
     AudioSource  _audio;
@@ -18,7 +18,7 @@ public class InitAudio : MonoBehaviour
     void Start()
     {
         _audio = GetComponent<AudioSource>();
-        _audio.PlayOneShot(original);
+        _audio.PlayOneShot(original); //want to test this for calling audio.
         _audio.PlayOneShot(compressed);
     }
 
@@ -26,7 +26,7 @@ public class InitAudio : MonoBehaviour
     void Update()
     {
         GetAudioSpectrum();   
-        GroupFreq();    
+        thirdOctaveBands();   
     }
 
 //get audio and perform FFT
@@ -35,39 +35,25 @@ public class InitAudio : MonoBehaviour
         _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);    
     }
 
-//take freq samples and group into bands for more spectral range
- void GroupFreq()
-    {
-        /*
-        220050/1024= 5.38hz/sample_el
-        split this into 1024 bands. If I do it evenly then 21.53hz/band. 
-        If I try to do it using powers of 2 like he did, I end up with
-        really small values in the range 0-1 for the first few values.
-
-         */
-        int sampleID =0;
-        for(int i=0;i<numBands;i++)
-        {
-            int samplePerBand= 32;
-            float avg=0;
-            for(int j=0;j<samplePerBand;j++)
-            {
-                avg+= _sample[sampleID]; //*(sampleID+1);
-                sampleID++;
-            }
-            avg/=samplePerBand;
-        //valuesin arr are small so mult by 10 to make
-            _freqGroupd[i]=avg*10;
-        }
-
-    }
-
+// split samples up using third octave calculations
     void thirdOctaveBands()
     {
-
+        int count=0;
+         float ctr=16;
+        for(int j=0;j<numBands;j++)
+        {
+            float avg=0;
+            ctr=ctr*Mathf.Pow(2,1/3);
+            _buffer[j]=ctr;
+            int ctrindex=Mathf.RoundToInt(ctr);
+            for(int l=0;l<ctrindex;l++){
+                avg+=_sample[count]*(count+1);
+                count++;
+            }
+            avg/=ctrindex;
+            _freqGroupd[j]=avg;
+        }
     }
-
-
 }
 
 

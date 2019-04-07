@@ -9,7 +9,6 @@ public class FreqBand: MonoBehaviour
     public float _Mult,_startvalue;
     public static int N =InitAudio.numBands;
     GameObject[] _mybands = new GameObject[N];
-    //Transform[] _bandarray= new Transform[N];
     Transform [,] _bandarray2d = new Transform[max_time, N];
     
     public float[,] time_Buff=new float[max_time, N];
@@ -67,6 +66,7 @@ void Start()
             }
         }    
     }
+    
 //creates the dynamic change in the shapes along y axis
     void BandAmpFn()
     {
@@ -89,32 +89,6 @@ void Start()
             }
 
     }
-
-
-    //    for(int x = 0; x<N; x++){
-    //         _ampArr2d[x, 0] = InitAudio._freqGroupd[x];
-    //         //time ++;
-    //     }
-
-        // for(int i=0; i<N; i++)
-        // {
-        //     for(int j=0; j<N; j++)
-        //     {
-        //         _bandarray2d[i,j].transform.localScale = new Vector3(transform.localScale.x,
-        //         (_ampArr2d[j,i]*_Mult)+_startvalue,transform.localScale.z);
-        //     }
-        // }
-//was used to update our buffer
-        // for(int i = 0; i<N;i++)
-        // {
-        //     for(int j = 1; j<N; j++)
-        //     {
-        //         _ampArr2d[i,j] = _ampArr2d[i,j-1];
-        //     }
-        // }
-
-
-
     
 }
 

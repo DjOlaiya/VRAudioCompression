@@ -84,7 +84,7 @@ Shader "Custom/ColoredPoint"
 
         void surf (Input IN, inout SurfaceOutputStandard o) 
         { 
-            o.Albedo.r = IN.worldPos.x-10;
+            o.Albedo.r = (IN.worldPos.x-6);
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = 1;
