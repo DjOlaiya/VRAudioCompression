@@ -8,8 +8,6 @@ public class InitAudio : MonoBehaviour
     //all my declarations
      public const int numBands=32;
      public const int numSamples=1024;
-     public AudioClip original;
-        public AudioClip compressed;
     AudioSource  _audio;
     
     public static float[] _sample = new float[numSamples]; //once i make it static it wont show up in unity cos it cant be changed
@@ -17,9 +15,9 @@ public class InitAudio : MonoBehaviour
     public static float[] _buffer = new float[numBands];
     void Start()
     {
-        _audio = GetComponent<AudioSource>();
-        _audio.PlayOneShot(original); //want to test this for calling audio.
-        _audio.PlayOneShot(compressed);
+        _audio=GetComponent<AudioSource>();
+        _audio.clip=Resources.Load<AudioClip>("faded");
+        _audio.Play();
     }
 
   
@@ -32,7 +30,9 @@ public class InitAudio : MonoBehaviour
 //get audio and perform FFT
     void GetAudioSpectrum()
     {
-        _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);    
+        _audio.GetSpectrumData(_sample,0,FFTWindow.BlackmanHarris);  
+        _audio.GetSpectrumData(_buffer,0,FFTWindow.BlackmanHarris);
+        // return _aud;   
     }
 
 // split samples up using third octave calculations
