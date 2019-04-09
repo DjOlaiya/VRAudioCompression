@@ -1,17 +1,30 @@
-from flask import Flask,request
-from flask import render_template
-from flask_cors import CORS
-import json
-from Compression import *
+__author__='deej'
 
+from flask import Flask,request,render_template
+
+# from flask_cors import CORS
+import json
+# from Compression import *
+from testhtml import *
 #Initiate flaskapp 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
-@app.route('/test/<var>')
-def index(var):
-    return 'This is the value in A:'
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/test', methods=['GET','POST'])
+def test():
+  comp_threshold =request.form['thresh']     # [-50, 0]
+  comp_ratio = request.form['ratio']        # [1, 50]
+  # knee_width = request.form['knee']      # [0, 20]
+  # attack =  request.form['attack']  # between 0 & 0.5
+  # release =   request.form['release']   # between 0.001 & 2.5
+  return 'Value of thresh is %s and %s is ratio <br/> <ahref="/">Home</a>' %(comp_threshold,comp_ratio)
+
+
 
 # @app.route('/compress', methods=['POST'])
 # def compress():

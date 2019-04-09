@@ -8,8 +8,13 @@ import os
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 1) Read in Wav File and Compression Parameters
+Thresh_Val=0
+c_Ratio=0
+k_wide=0
+att=0
+rel=0
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Reading in .wav")
+# print("* Reading in .wav")
 A="*Reading in .wav*"
 if os.path.exists("compressed_track.wav"):
     os.remove("compressed_track.wav")
@@ -23,16 +28,16 @@ audio_type = audio.dtype
 length = len(audio)
 
 # Read in User-Inputted Compression Parameter Values
-comp_threshold = -40    # [-50, 0]
-comp_ratio = 15         # [1, 50]
-knee_width = 15        # [0, 20]
-attack = 0.15    # between 0 & 0.5
-release = 0.75     # between 0.001 & 2.5
+comp_threshold      # [-50, 0]
+comp_ratio         # [1, 50]
+knee_width = 10      # [0, 20]
+attack = .3   # between 0 & 0.5
+release =  .1    # between 0.001 & 2.5
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 2) Convert Amplitude to Decibels, and normalize to 0
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Converting Amplitude to Decibels")
+# print("* Converting Amplitude to Decibels")
 B="* Converting Amplitude to Decibels"
 # Create Intermediate Arrays as Floats, to avoid rounding/runoff errors
 audio_db = np.zeros((length, 2), dtype=np.float64)
@@ -47,7 +52,7 @@ for i in range(1, length, 1):
         else:
             audio_db[i, j] = 20 * math.log10(abs(audio[i, j]))
 
-print("* Normalizing Decibels to 0")
+# print("* Normalizing Decibels to 0")
 C="* Normalizing Decibels to 0"
 # Normalize the dB values to 0, using the theoretical limit for 16-bit audio, 96
 for i in range(0, length, 1):
@@ -57,7 +62,7 @@ for i in range(0, length, 1):
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 3) Apply Compression
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Applying Compression")
+# print("* Applying Compression")
 D="* Applying Compression"
 
 # define parameter-associated terms to reduce computations during compression
@@ -98,7 +103,7 @@ for i in range(0, length, 1):
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 4) Gain Smoothing
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Gain Smoothing")
+# print("* Gain Smoothing")
 E="* Gain Smoothing"
 # The gain reduction calculated in step 3 is smoothed in this stage,
 # This is to ensure a realistic, and pleasing to the listener, gain reduction curve
@@ -134,7 +139,7 @@ for i in range(1, length, 1):
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 5) Apply Make Up Gain
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Applying Make Up Gain")
+# print("* Applying Make Up Gain")
 F="* Applying Make Up Gain"
 # After compression and smoothing, the audio values have been condensed
 # This results in a quieter signal than the original
@@ -156,7 +161,7 @@ for i in range(0, length, 1):
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 6) Calculate Linear Gain and Apply to Original Signal, Write Array to New .wav File
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Converting Decibels to Amplitude")
+# print("* Converting Decibels to Amplitude")
 G="* Converting Decibels to Amplitude"
 
 # Create Intermediate Arrays as Floats, to avoid rounding/runoff errors
@@ -180,15 +185,15 @@ for i in range(0, length, 1):
 
 
 # Write compressed array to new .wav file
-print("* Writing New .wav")
+# print("* Writing New .wav")
 H="* Writing New .wav"
-scipy.io.wavfile.write("compressed_track.wav", sample_rate, final_comp_audio)
+# scipy.io.wavfile.write("compressed_track.wav", sample_rate, final_comp_audio)
 
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 7) Create Graphs
 # # # # # # # # # # # # # # # # # # # # # # # # # #
-print("* Calculating Graph Info for Printing")
+# print("* Calculating Graph Info for Printing")
 I="* Calculating Graph Info for Printing"
 final_audio_db = np.zeros((length, 2), dtype=np.float64)
 final_audio_db_norm = np.zeros((length, 2), dtype=np.float64)
@@ -209,7 +214,7 @@ for i in range(0, length, 1):
 
         final_difference_db_norm[i, j] = np.float(audio_db_norm[i, j]) - np.float(final_audio_db_norm[i, j])
 
-print("* Printing Graphs")
+# print("* Printing Graphs")
 J="* Printing Graphs"
 gs = gridspec.GridSpec(3, 1)
 max_y = 100

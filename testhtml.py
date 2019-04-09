@@ -1,3 +1,7 @@
 # testing a call with user input from html
-a=input("please enter a letter:")
-print(a)
+def addd(a,b):
+    c=a+b
+    return c
+
+d=addd(a,b)
+print(d)
