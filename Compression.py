@@ -8,7 +8,7 @@ import os
 
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 1) Read in Wav File and Compression Parameters
-Thresh_Val=0
+Thresh_Val=120
 c_Ratio=0
 k_wide=0
 att=0
@@ -28,12 +28,12 @@ audio_type = audio.dtype
 length = len(audio)
 
 # Read in User-Inputted Compression Parameter Values
-comp_threshold      # [-50, 0]
-comp_ratio         # [1, 50]
+comp_threshold=1      # [-50, 0]
+comp_ratio =2        # [1, 50]
 knee_width = 10      # [0, 20]
 attack = .3   # between 0 & 0.5
 release =  .1    # between 0.001 & 2.5
-
+"""
 # # # # # # # # # # # # # # # # # # # # # # # # # #
 # 2) Convert Amplitude to Decibels, and normalize to 0
 # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -270,4 +270,4 @@ plt.grid(b=True, which='minor', color='#999999', linestyle='-', alpha=0.5)
 # display the plot
 plt.show()
 
-
+"""

@@ -11,6 +11,8 @@ from testhtml import *
 app = Flask(__name__)
 # CORS(app)
 
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -19,12 +21,16 @@ def index():
 def test():
   comp_threshold =request.form['thresh']     # [-50, 0]
   comp_ratio = request.form['ratio']        # [1, 50]
+  print(comp_ratio)
+  params={}
+  params['Thresh_Val']=int(comp_threshold)
+  params['ratio']=int(comp_ratio)
   # knee_width = request.form['knee']      # [0, 20]
   # attack =  request.form['attack']  # between 0 & 0.5
   # release =   request.form['release']   # between 0.001 & 2.5
-  return 'Value of thresh is %s and %s is ratio <br/> <ahref="/">Home</a>' %(comp_threshold,comp_ratio)
+  return 'params'
 
-
+# print(params[a])
 
 # @app.route('/compress', methods=['POST'])
 # def compress():
