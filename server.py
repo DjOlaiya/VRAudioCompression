@@ -1,17 +1,37 @@
-from flask import Flask,request
-from flask import render_template
-from flask_cors import CORS
-import json
-from Compression import *
+__author__='deej'
 
+from flask import Flask,request,render_template
+
+# from flask_cors import CORS
+import json
+# from Compression import *
+from Compression import *
 #Initiate flaskapp 
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
-@app.route('/test/<var>')
-def index(var):
-    return 'This is the value in A:'
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/test', methods=['GET','POST'])
+def test():
+  if request.method == 'POST':
+    thresh = float(request.form['thresh'])     # [-50, 0]
+    ratio = int(request.form['ratio'])        # [1, 50]
+    print(ratio)
+    knee= int(request.form['knee'])      # [0, 20]
+    att = float(request.form['att']) # between 0 & 0.5
+    rel = float(request.form['rel'])   # between 0.001 & 2.5
+      # def __init__(self,comp_threshold,comp_ratio,attack,release,knee_width):
+    dr_compress=DRC(thresh,ratio,att,rel,knee)
+    dr_compress.Init_Compression()
+  return 'params'
+
+# print(params[a])
 
 # @app.route('/compress', methods=['POST'])
 # def compress():

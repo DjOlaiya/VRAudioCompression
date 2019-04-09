@@ -735,7 +735,7 @@ MonoBehaviour:
   prefab: {fileID: 2995790862220327568, guid: 2d65a230f9ff2461e83ba4733811b74b, type: 3}
   _SpectralBands: {fileID: 6698268989028014118, guid: 2d65a230f9ff2461e83ba4733811b74b,
     type: 3}
-  _Mult: 100
+  _Mult: 10
   _startvalue: 1
   curr_time: 0
 --- !u!1 &1450333954
@@ -958,7 +958,7 @@ MonoBehaviour:
   prefab: {fileID: 976133554302886774, guid: afae24a72aab04c68b45b2c9f345397a, type: 3}
   _SpectralBands: {fileID: 5007251707308039210, guid: afae24a72aab04c68b45b2c9f345397a,
     type: 3}
-  _Mult: 200
+  _Mult: 20
   _startvalue: 1
   curr_time: 0
 --- !u!114 &1490922838

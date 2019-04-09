@@ -3,14 +3,22 @@
 <head>
     <title>Load Python Script</title> 
     <meta charset=utf-8> 
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" 
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
     <body>
         <h1>My Website</h1>
-        <form action="/my-link/">
-            <input type="submit" value="Click me" />
-        </form>
-        
-        <button> <a href="/my-link/">Click me</a></button>
-
+      <p>these are compression params. <br>
+        <form  action='/test' method="POST">
+            att: <input type="float" name="att"> <br/>
+            rel: <input type="float" name="rel" />   
+        thresh: <input type="number" name="thresh"> <br/>
+        ratio: <input type="number" name="ratio" />
+        knee: <input type="number" name="knee">
+        <input type="submit" name="form" value="submit" />
+    </form>
+</p>
+    
+   
     </body>
 </html>
