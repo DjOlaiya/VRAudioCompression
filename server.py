@@ -5,7 +5,7 @@ from flask import Flask,request,render_template
 # from flask_cors import CORS
 import json
 # from Compression import *
-from testhtml import *
+from Compression import *
 #Initiate flaskapp 
 
 app = Flask(__name__)
@@ -19,15 +19,16 @@ def index():
 
 @app.route('/test', methods=['GET','POST'])
 def test():
-  comp_threshold =request.form['thresh']     # [-50, 0]
-  comp_ratio = request.form['ratio']        # [1, 50]
-  print(comp_ratio)
-  params={}
-  params['Thresh_Val']=int(comp_threshold)
-  params['ratio']=int(comp_ratio)
-  # knee_width = request.form['knee']      # [0, 20]
-  # attack =  request.form['attack']  # between 0 & 0.5
-  # release =   request.form['release']   # between 0.001 & 2.5
+  if request.method == 'POST':
+    thresh = float(request.form['thresh'])     # [-50, 0]
+    ratio = int(request.form['ratio'])        # [1, 50]
+    print(ratio)
+    knee= int(request.form['knee'])      # [0, 20]
+    att = float(request.form['att']) # between 0 & 0.5
+    rel = float(request.form['rel'])   # between 0.001 & 2.5
+      # def __init__(self,comp_threshold,comp_ratio,attack,release,knee_width):
+    dr_compress=DRC(thresh,ratio,att,rel,knee)
+    dr_compress.Init_Compression()
   return 'params'
 
 # print(params[a])
